@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résultats du Quiz</title>
+    <link rel="stylesheet" href="/static/css/quiz_result.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Score Card -->
+        <div class="score-card">
+            {% if percentage >= 80 %}
+                <div class="score-emoji"></div>
+                <div class="score-title">Excellent !</div>
+                <div class="score-subtitle">Performance exceptionnelle, {{ student.name }} !</div>
+            {% elif percentage >= 60 %}
+                <div class="score-emoji"></div>
+                <div class="score-title">Bien joué !</div>
+                <div class="score-subtitle">Bon travail, {{ student.name }} !</div>
+            {% elif percentage >= 40 %}
+                <div class="score-emoji"></div>
+                <div class="score-title">Pas mal !</div>
+                <div class="score-subtitle">Continue tes efforts, {{ student.name }} !</div>
+            {% else %}
+                <div class="score-emoji"></div>
+                <div class="score-title">Continue !</div>
+                <div class="score-subtitle">Tu peux faire mieux, {{ student.name }} !</div>
+            {% endif %}
+
+            <div class="score-circle">
+                <div class="score-number">{{ score }}</div>
+                <div class="score-total">/ {{ total }}</div>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-box">
+                    <div class="stat-value">{{ percentage }}%</div>
+                    <div class="stat-label">Réussite</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">{{ score }}</div>
+                    <div class="stat-label">Correctes</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">{{ total - score }}</div>
+                    <div class="stat-label">Incorrectes</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">+{{ points_earned }}</div>
+                    <div class="stat-label">Points</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review Section -->
+        <div class="review-section">
+            <div class="review-header">
+                <h2 class="review-title">Révision des réponses</h2>
+                <button class="toggle-button" onclick="toggleReview()">
+                    <span id="toggleText">Afficher tout</span>
+                </button>
+            </div>
+
+            <div id="reviewContent">
+                {% for answer in answers %}
+                <div class="answer-item {% if answer.is_correct %}correct{% else %}incorrect{% endif %}">
+                    <div class="answer-question">
+                        <span class="answer-icon">{% if answer.is_correct %}✅{% else %}❌{% endif %}</span>
+                        <span>{{ answer.question }}</span>
+                    </div>
+                    <div class="answer-details">
+                        {% if answer.user_answer %}
+                        <div class="answer-row">
+                            <span class="answer-label">Votre réponse:</span>
+                            <span class="answer-value {% if answer.is_correct %}correct-answer{% else %}wrong-answer{% endif %}">
+                                {{ answer.user_answer }}
+                            </span>
+                        </div>
+                        {% else %}
+                        <div class="answer-row">
+                            <span class="answer-label">Votre réponse:</span>
+                            <span class="answer-value wrong-answer">Pas de réponse</span>
+                        </div>
+                        {% endif %}
+                        {% if not answer.is_correct %}
+                        <div class="answer-row">
+                            <span class="answer-label">Réponse correcte:</span>
+                            <span class="answer-value correct-answer">{{ answer.correct_answer }}</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+            <a href="/quiz" class="action-button secondary">← Retour aux quiz</a>
+            <a href="/quiz/play/{{ category.index.lower() }}?student_id={{ student.id }}" class="action-button primary">
+                Réessayer 
+            </a>
+        </div>
+    </div>
+
+    <script src="/static/js/quiz_result.js"></script>
+</body>
+</html>

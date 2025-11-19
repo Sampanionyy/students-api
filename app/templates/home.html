@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizMaster - Testez vos connaissances</title>
+    <link rel="stylesheet" href="/static/css/home.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🎯</div>
+            <h1>QuizMaster</h1>
+            <p class="subtitle">Testez vos connaissances, défiez vos amis, devenez un champion !</p>
+            <a href="/quiz" class="cta-button">Commencer maintenant →</a>
+        </header>
+
+        <div class="features">
+            <div class="feature-card">
+                <span class="feature-icon">🏆</span>
+                <div class="feature-title">Classement en Direct</div>
+                <p class="feature-desc">Comparez vos scores avec d'autres joueurs et gravissez les échelons du classement mondial</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">📚</span>
+                <div class="feature-title">6 Catégories</div>
+                <p class="feature-desc">Sports, Chimie, Économie, Astronomie, Maths et Architecture - trouvez votre domaine favori</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">⚡</span>
+                <div class="feature-title">Questions Variées</div>
+                <p class="feature-desc">Des dizaines de questions soigneusement sélectionnées pour tester vos connaissances</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">📊</span>
+                <div class="feature-title">Suivi des Progrès</div>
+                <p class="feature-desc">Suivez vos statistiques, votre taux de réussite et votre évolution dans le temps</p>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Quiz joués</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">35+</div>
+                    <div class="stat-label">Questions</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Catégories</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">Joueurs actifs</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="categories-preview">
+            <h2 class="section-title">Choisissez votre catégorie</h2>
+            <div class="categories-grid">
+                <div class="category-preview" onclick="window.location.href='/quiz'">
+                    <span class="category-icon">⚽</span>
+                    <div class="category-name">Sports</div>
+                </div>
+                <div class="category-preview" onclick="window.location.href='/quiz'">
+                    <span class="category-icon">🧪</span>
+                    <div class="category-name">Chimie</div>
+                </div>
+                <div class="category-preview" onclick="window.location.href='/quiz'">
+                    <span class="category-icon">📈</span>
+                    <div class="category-name">Économie</div>
+                </div>
+                <div class="category-preview" onclick="window.location.href='/quiz'">
+                    <span class="category-icon">🌟</span>
+                    <div class="category-name">Astronomie</div>
+                </div>
+                <div class="category-preview" onclick="window.location.href='/quiz'">
+                    <span class="category-icon">🔢</span>
+                    <div class="category-name">Maths</div>
+                </div>
+                <div class="category-preview" onclick="window.location.href='/quiz'">
+                    <span class="category-icon">🏛️</span>
+                    <div class="category-name">Architecture</div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2024 QuizMaster. Développé avec ❤️ pour les passionnés de connaissances.</p>
+        </footer>
+    </div>
+</body>
+</html>

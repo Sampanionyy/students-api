@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - {{ category.name }}</title>
+    <link rel="stylesheet" href="/static/css/quiz_play.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="quiz-header">
+            <div class="student-info">
+                <div class="student-avatar">{{ student.name[0] }}</div>
+                <div class="student-details">
+                    <h2>{{ student.name }}</h2>
+                    <span class="category-badge">
+                        {{ category.icon | safe }}
+                        {{ category.name }}
+                    </span>
+                </div>
+            </div>
+            <div class="timer-section">
+                <div id="timer" class="timer">02:00</div>
+                <div class="timer-label">Temps restant</div>
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-info">
+                <span class="progress-text">Question <span id="currentQuestion">0</span> sur {{ total_questions }}</span>
+                <span class="progress-text"><span id="answeredCount">0</span> répondu(es)</span>
+            </div>
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <!-- Quiz Form -->
+        <form id="quizForm" method="POST" action="/quiz/submit" class="quiz-form">
+            {% for question in questions %}
+            <div class="question-block" data-question="{{ loop.index }}">
+                <div class="question-header">
+                    <div class="question-number">{{ loop.index }}</div>
+                    <div class="question-text">{{ question.question }}</div>
+                </div>
+                <div class="options-grid">
+                    {% for option in question.options %}
+                    <div>
+                        <input type="radio" 
+                               id="q{{ question.id }}_opt{{ loop.index }}" 
+                               name="question_{{ question.id }}" 
+                               value="{{ option }}"
+                               class="option-input"
+                               onchange="updateProgress()">
+                        <label for="q{{ question.id }}_opt{{ loop.index }}" class="option-label">
+                            <div class="option-radio"></div>
+                            <div class="option-text">{{ option }}</div>
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+
+            <div class="submit-section">
+                <button type="submit" class="submit-button">
+                    Soumettre mes réponses
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="6"/>
+                        <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Time's Up Modal -->
+    <div id="timeUpModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                    <path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49"/>
+                </svg>
+            </div>
+            <div class="modal-title">Temps écoulé !</div>
+            <div class="modal-text">Le quiz va être soumis automatiquement...</div>
+        </div>
+    </div>
+
+    <script src="/static/js/quiz_play.js"></script>
+</body>
+</html>

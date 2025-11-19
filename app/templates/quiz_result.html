@@ -8,22 +8,51 @@
 </head>
 <body>
     <div class="container">
-        <!-- Score Card -->
         <div class="score-card">
             {% if percentage >= 80 %}
-                <div class="score-emoji"></div>
+                <div class="score-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                        <path d="M4 22h16"/>
+                        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                        <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/>
+                    </svg>
+                </div>
                 <div class="score-title">Excellent !</div>
                 <div class="score-subtitle">Performance exceptionnelle, {{ student.name }} !</div>
             {% elif percentage >= 60 %}
-                <div class="score-emoji"></div>
+                <div class="score-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                        <line x1="9" y1="9" x2="9.01" y2="9"/>
+                        <line x1="15" y1="9" x2="15.01" y2="9"/>
+                    </svg>
+                </div>
                 <div class="score-title">Bien joué !</div>
                 <div class="score-subtitle">Bon travail, {{ student.name }} !</div>
             {% elif percentage >= 40 %}
-                <div class="score-emoji"></div>
+                <div class="score-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="8" y1="15" x2="16" y2="15"/>
+                        <line x1="9" y1="9" x2="9.01" y2="9"/>
+                        <line x1="15" y1="9" x2="15.01" y2="9"/>
+                    </svg>
+                </div>
                 <div class="score-title">Pas mal !</div>
                 <div class="score-subtitle">Continue tes efforts, {{ student.name }} !</div>
             {% else %}
-                <div class="score-emoji"></div>
+                <div class="score-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                        <path d="M16 16s-1.5-2-4-2-4 2-4 2"/>
+                        <line x1="9" y1="9" x2="9.01" y2="9"/>
+                        <line x1="15" y1="9" x2="15.01" y2="9"/>
+                    </svg>
+                </div>
                 <div class="score-title">Continue !</div>
                 <div class="score-subtitle">Tu peux faire mieux, {{ student.name }} !</div>
             {% endif %}
@@ -53,7 +82,6 @@
             </div>
         </div>
 
-        <!-- Review Section -->
         <div class="review-section">
             <div class="review-header">
                 <h2 class="review-title">Révision des réponses</h2>
@@ -66,7 +94,18 @@
                 {% for answer in answers %}
                 <div class="answer-item {% if answer.is_correct %}correct{% else %}incorrect{% endif %}">
                     <div class="answer-question">
-                        <span class="answer-icon">{% if answer.is_correct %}✅{% else %}❌{% endif %}</span>
+                        <div class="answer-icon">
+                            {% if answer.is_correct %}
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#4caf50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            {% else %}
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#f44336" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                            {% endif %}
+                        </div>
                         <span>{{ answer.question }}</span>
                     </div>
                     <div class="answer-details">
@@ -95,11 +134,19 @@
             </div>
         </div>
 
-        <!-- Actions -->
         <div class="actions">
-            <a href="/quiz" class="action-button secondary">← Retour aux quiz</a>
+            <a href="/quiz" class="action-button secondary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px; display: inline-block; vertical-align: middle; margin-right: 8px;">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Retour aux quiz
+            </a>
             <a href="/quiz/play/{{ category.index.lower() }}?student_id={{ student.id }}" class="action-button primary">
-                Réessayer 
+                Réessayer
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px; display: inline-block; vertical-align: middle; margin-left: 8px;">
+                    <polyline points="23 4 23 10 17 10"/>
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                </svg>
             </a>
         </div>
     </div>

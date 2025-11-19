@@ -8,7 +8,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <div class="quiz-header">
             <div class="student-info">
                 <div class="student-avatar">{{ student.name[0] }}</div>
@@ -26,7 +25,6 @@
             </div>
         </div>
 
-        <!-- Progress Bar -->
         <div class="progress-container">
             <div class="progress-info">
                 <span class="progress-text">Question <span id="currentQuestion">0</span> sur {{ total_questions }}</span>
@@ -37,7 +35,6 @@
             </div>
         </div>
 
-        <!-- Quiz Form -->
         <form id="quizForm" method="POST" action="/quiz/submit" class="quiz-form">
             {% for question in questions %}
             <div class="question-block" data-question="{{ loop.index }}">
@@ -67,24 +64,21 @@
             <div class="submit-section">
                 <button type="submit" class="submit-button">
                     Soumettre mes réponses
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <circle cx="12" cy="12" r="6"/>
-                        <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
                     </svg>
                 </button>
             </div>
         </form>
     </div>
 
-    <!-- Time's Up Modal -->
     <div id="timeUpModal" class="modal">
         <div class="modal-content">
             <div class="modal-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"/>
                     <polyline points="12 6 12 12 16 14"/>
-                    <path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49"/>
                 </svg>
             </div>
             <div class="modal-title">Temps écoulé !</div>

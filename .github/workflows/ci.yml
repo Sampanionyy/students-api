@@ -41,13 +41,17 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
+
+          # Fetch all branches
+          git fetch origin
+
           # Merge main → dev
           git checkout dev
-          git merge origin/main --no-edit
+          git merge origin/main --no-edit || echo "Merge conflict in dev, manual fix needed"
           git push origin dev
-          
+
           # Merge main → prod
           git checkout prod
-          git merge origin/main --no-edit
+          git merge origin/main --no-edit || echo "Merge conflict in prod, manual fix needed"
           git push origin prod
+

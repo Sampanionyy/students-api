@@ -43,15 +43,16 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
           # Fetch all branches
-          git fetch origin
+          git fetch --all
 
           # Merge main → dev
-          git checkout dev
+          git checkout dev || git checkout -b dev origin/dev
           git merge origin/main --no-edit || echo "Merge conflict in dev, manual fix needed"
           git push origin dev
 
           # Merge main → prod
-          git checkout prod
+          git checkout prod || git checkout -b prod origin/prod
           git merge origin/main --no-edit || echo "Merge conflict in prod, manual fix needed"
           git push origin prod
+
 

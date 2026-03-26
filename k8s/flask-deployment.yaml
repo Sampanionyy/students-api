@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: flask-api
-          image: flask-api:latest
-          imagePullPolicy: Never
+          image: sampaniony/flask-api:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000

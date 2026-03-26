@@ -1,18 +1,30 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
-  name: myapp
+  name: my-apps-set
   namespace: argocd
 spec:
-  project: default
-  source:
-    repoURL: https://github.com/sampanionyy/students-api.git
-    targetRevision: main
-    path: .
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: default
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  generators:
+    - list:
+        elements:
+          - appName: students-api
+            repoURL: https://github.com/Sampanionyy/students-api.git
+          - appName: pdf-viewer
+            repoURL: https://github.com/Sampanionyy/pdf-viewer.git
+
+  template:
+    metadata:
+      name: '{{appName}}'
+    spec:
+      project: default
+      source:
+        repoURL: '{{repoURL}}'
+        targetRevision: main
+        path: k8s
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

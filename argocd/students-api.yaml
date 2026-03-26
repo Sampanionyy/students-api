@@ -3,6 +3,7 @@ kind: ApplicationSet
 metadata:
   name: my-apps-set
   namespace: argocd
+
 spec:
   generators:
     - list:
@@ -15,15 +16,23 @@ spec:
   template:
     metadata:
       name: '{{appName}}'
+
     spec:
       project: default
+
       source:
         repoURL: '{{repoURL}}'
         targetRevision: main
-        path: k8s
+        path: first-chart   
+
+        helm:
+          valueFiles:
+            - values.yaml
+
       destination:
         server: https://kubernetes.default.svc
         namespace: default
+
       syncPolicy:
         automated:
           prune: true
